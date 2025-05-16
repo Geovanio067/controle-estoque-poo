@@ -1,39 +1,50 @@
 from Produto import Produto
 from ProdutoAlimenticio import ProdutoAlimenticio
 
-lista = []
+produtos = []
 
 while True:
-    print('')
-    print('1 - Cadastrar Produto')
-    print('2 - Cadastrar Produto Alimentício')
-    print('3 - Mostrar Produtos')
+    print('\n1 - Produto comum')
+    print('2 - Produto alimentício')
+    print('3 - Ver produtos')
+    print('4 - Repor')
+    print('5 - Vender')
     print('0 - Sair')
 
-    op = input('Escolha: ')
+    opcao = input('opção: ')
 
-    if op == '1':
-        nome = input('Nome: ')
-        preco = float(input('Preço: '))
-        qtd = int(input('Quantidade: '))
+    if opcao == '1':
+        nome = input('nome: ')
+        preco = float(input('preço: '))
+        qtd = int(input('quantidade: '))
         p = Produto(nome, preco, qtd)
-        lista.append(p)
+        produtos.append(p)
 
-    elif op == '2':
-        nome = input('Nome: ')
-        preco = float(input('Preço: '))
-        qtd = int(input('Quantidade: '))
-        validade = input('Validade: ')
-        pa = ProdutoAlimenticio(nome, preco, qtd, validade)
-        lista.append(pa)
+    elif opcao == '2':
+        nome = input('nome: ')
+        preco = float(input('preço: '))
+        qtd = int(input('quantidade: '))
+        validade = input('validade: ')
+        p = ProdutoAlimenticio(nome, preco, qtd, validade)
+        produtos.append(p)
 
-    elif op == '3':
-        for i in lista:
-            print('')
-            i.exibir_produtos()
+    elif opcao == '3':
+        for p in produtos:
+            p.exibir_produtos()
 
-    elif op == '0':
+    elif opcao == '4':
+        nome = input('nome do produto: ')
+        qtd = int(input('quanto vai repor: '))
+        for p in produtos:
+            if p.nome == nome:
+                p.repor_estoque(qtd)
+
+    elif opcao == '5':
+        nome = input('nome do produto: ')
+        qtd = int(input('quanto vai vender: '))
+        for p in produtos:
+            if p.nome == nome:
+                p.vender_produto(qtd)
+
+    elif opcao == '0':
         break
-
-    else:
-        print('Opção inválida')
